@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-const API_BASE_URL = 'http://192.168.31.86:5000'
+const API_BASE_URL = 'https://my-assignment-app.onrender.com'
 
 const ApiServices = axios.create({
   baseURL: API_BASE_URL,

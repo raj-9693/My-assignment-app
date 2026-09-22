@@ -17,23 +17,7 @@ import dummyCompetition from '../../data/dummyCompetition';
 import colors from '../../styles/colors';
 import {getActiveCompetition} from '../../Services/competitionApi'
 
-// ─────────────────────────────────────────────────────────────
-// TODO (when backend is ready): replace the dummy import above with
-// a real fetch, e.g.:
-//
-//   const [competition, setCompetition] = useState(null);
-//   
-//
-//   useEffect(() => {
-//     fetch(`${API_BASE_URL}/competitions/${competitionId}`)
-//       .then((res) => res.json())
-//       .then((data) => setCompetition(data))
-//       .finally(() => setLoading(false));
-//   }, [competitionId]);
-//
-// Every component below already expects exactly this data shape,
-// so no component code needs to change — only this screen does.
-// ─────────────────────────────────────────────────────────────
+
 
 export default function CompetitionDetailsScreen({ navigation }) {
   const [loading, setLoading] = useState(true);
