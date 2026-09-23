@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import colors from '../styles/colors';
-
+ 
 export function PaymentInfoBanner({ poweredBy, refundPolicyText }) {
   return (
     <View style={styles.paymentBanner}>
@@ -13,7 +13,7 @@ export function PaymentInfoBanner({ poweredBy, refundPolicyText }) {
     </View>
   );
 }
-
+ 
 export function ReferEarnCard({ referral, onCopy }) {
   return (
     <View style={styles.referCard}>
@@ -21,12 +21,12 @@ export function ReferEarnCard({ referral, onCopy }) {
         <Text style={styles.megaphone}>{'\u{1F4E3}'}</Text>
         <View>
           <Text style={styles.referTitle}>Refer & earn more discount</Text>
-          <Text style={styles.referSub}>Earn ₹{referral.earnPerSignup} for every signup</Text>
+          <Text style={styles.referSub}>Earn ₹{referral?.earnPerSignup } for every signup</Text>
         </View>
       </View>
-
+ 
       <View style={styles.linkRow}>
-        <Text style={styles.linkText} numberOfLines={1}>{referral.link}</Text>
+        <Text style={styles.linkText} numberOfLines={1}>{referral?.link}</Text>
         <TouchableOpacity style={styles.copyButton} onPress={() => onCopy && onCopy(referral.link)}>
           <Text style={styles.copyText}>Copy</Text>
         </TouchableOpacity>

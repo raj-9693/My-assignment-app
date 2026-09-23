@@ -1,6 +1,8 @@
 import React from 'react';
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import colors from '../styles/colors';
+
+
 
 export default function PreviousWinners({ winners, onPlayVideo }) {
   if (!winners || winners.length === 0) return null;
@@ -10,20 +12,31 @@ export default function PreviousWinners({ winners, onPlayVideo }) {
       <Text style={styles.heading}>Previous winners</Text>
 
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
-        {winners.map((winner, index) => (
-          <TouchableOpacity
-            key={`${winner.name}-${index}`}
-            style={styles.card}
-            activeOpacity={0.8}
-            onPress={() => onPlayVideo && onPlayVideo(winner)}
-          >
-            <View style={styles.thumbnail}>
-              <Text style={styles.playIcon}>{'\u25B6'}</Text>
-            </View>
-            <Text style={styles.name} numberOfLines={1}>{winner.name}</Text>
-            <Text style={styles.position}>{winner.position}</Text>
-          </TouchableOpacity>
-        ))}
+        {winners.map((winner, index) => {
+          const thumbnail = winner.photoUrl || winner.videoUrl
+
+          return (
+            <TouchableOpacity
+              key={`${winner.name}-${index}`}
+              style={styles.card}
+              activeOpacity={0.8}
+              onPress={() => onPlayVideo && onPlayVideo(winner)}
+            >
+              <View style={styles.thumbnail}>
+                <Image
+                  source={{ uri: thumbnail }}
+                  style={StyleSheet.absoluteFill}
+                  resizeMode="cover"
+                />
+                <View style={styles.playBadge}>
+                  <Text style={styles.playIcon}>{'\u25B6'}</Text>
+                </View>
+              </View>
+              <Text style={styles.name} numberOfLines={1}>{winner.name}</Text>
+              <Text style={styles.position}>{winner.position}</Text>
+            </TouchableOpacity>
+          );
+        })}
       </ScrollView>
     </View>
   );
@@ -42,8 +55,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 8,
+    overflow: 'hidden',
+    position: 'relative',
   },
-  playIcon: { color: colors.primary, fontSize: 18 },
+  playBadge: {
+    position: 'absolute',
+    backgroundColor: 'rgba(0, 0, 0, 0.35)',
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  playIcon: { color: '#fff', fontSize: 14 },
   name: { fontSize: 13, fontWeight: '700', color: colors.text },
   position: { fontSize: 12, color: colors.textSecondary, marginTop: 2 },
 });

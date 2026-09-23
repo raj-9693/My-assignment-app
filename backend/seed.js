@@ -47,10 +47,10 @@ const initialCompetitionData = {
   ],
 
   previousWinners: [
-    { name: 'Riya Shah', position: '1st Winner', photoUrl: 'https://i.pravatar.cc/150?img=1', videoUrl: '' },
-    { name: 'Aarav Mehta', position: '1st Winner', photoUrl: 'https://i.pravatar.cc/150?img=2', videoUrl: '' },
-    { name: 'Neha Verma', position: '2nd Winner', photoUrl: 'https://i.pravatar.cc/150?img=3', videoUrl: '' },
-    { name: 'Ishita Chauhan', position: '3rd Winner', photoUrl: 'https://i.pravatar.cc/150?img=4', videoUrl: '' },
+    { name: 'Riya Shah', position: '1st Winner', photoUrl: 'https://i.pravatar.cc/150?img=1', videoUrl: 'https://innohealthmagazine.com/2021/in-focus/theme/the-soulful-path-of-yoga-transversed-by-a-classical-dancer/' },
+    { name: 'Aarav Mehta', position: '1st Winner', photoUrl: 'https://i.pravatar.cc/150?img=2', videoUrl: 'https://innohealthmagazine.com/2021/in-focus/theme/the-soulful-path-of-yoga-transversed-by-a-classical-dancer/' },
+    { name: 'Neha Verma', position: '2nd Winner', photoUrl: 'https://i.pravatar.cc/150?img=3', videoUrl: 'https://innohealthmagazine.com/2021/in-focus/theme/the-soulful-path-of-yoga-transversed-by-a-classical-dancer/' },
+    { name: 'Ishita Chauhan', position: '3rd Winner', photoUrl: 'https://i.pravatar.cc/150?img=4', videoUrl: 'https://innohealthmagazine.com/2021/in-focus/theme/the-soulful-path-of-yoga-transversed-by-a-classical-dancer/' },
   ],
 
   // These two objects were the ones missing — CompetitionDetailsScreen.js

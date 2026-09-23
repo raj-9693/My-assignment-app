@@ -26,8 +26,9 @@ import ApiServices from "./ApiServices"
 
 // 2. POST User Registration Function (Jo abhi backend banaya)
 
-export const registerForCompetition = async (competitionId, userData) => {
-   const Endpoints= `api/competitions/${competitionId}/register`
+export const registerForCompetition = async ( userData) => {
+   const competitionId ='6ab2c3b1fcd9dc1bb23f5ffd'
+   const Endpoints= `/api/competitions/${competitionId}/register`
     console.log(`🚀 [API START] - Calling Registrations (post) | Endpoint: ${Endpoints}`)
 
  

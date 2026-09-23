@@ -2,12 +2,7 @@ import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import colors from '../styles/colors';
 
-// `status` will eventually be driven by real backend state:
-// 'register' -> not registered yet, spots available
-// 'registered' -> already registered, submission window hasn't opened
-// 'upload' -> registered + submission window is open
-// 'full' -> spots are full and user hasn't registered
-// 'closed' -> registration window has passed
+
 export default function RegisterButton({ status = 'register', entryFee, onPress }) {
   const CONFIG = {
     register: { label: `Register now · ₹${entryFee}`, disabled: false },

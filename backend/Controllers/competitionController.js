@@ -65,7 +65,7 @@ const registerForCompetition = async (req, res) => {
     if (!competition) {
       return res.status(400).json({
         success: false,
-        message: 'Registration failed! Competition spots full ho chuke hain ya competition active nahi hai.',
+        message:'Registration is closed for this competition.',
       });
     }
 
@@ -80,7 +80,7 @@ const registerForCompetition = async (req, res) => {
       await Competition.findByIdAndUpdate(id, { $inc: { spotsBooked: -1 } });
       return res.status(400).json({
         success: false,
-        message: 'Aap is competition mein pehle se registered hain.',
+        message: 'you are olready registered in  competition.',
       });
     }
 

@@ -2,16 +2,16 @@ import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import colors from '../styles/colors';
 
-export default function JudgeCard({ judge, onPlayIntro }) {
+export default function JudgeCard({ onPlayIntro,name,title,experience,photoUrl}) {
   return (
     <View style={styles.card}>
-      <Image source={{ uri: judge.photoUrl }} style={styles.avatar} />
+      <Image source={{ uri:photoUrl }} style={styles.avatar} />
 
       <View style={styles.info}>
         <Text style={styles.label}>Judge</Text>
-        <Text style={styles.name}>{judge.name}</Text>
-        <Text style={styles.title}>{judge.title}</Text>
-        <Text style={styles.experience}>{judge.experience}</Text>
+        <Text style={styles.name}>{name}</Text>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.experience}>{experience}</Text>
       </View>
 
       <TouchableOpacity style={styles.playColumn} onPress={onPlayIntro} activeOpacity={0.7}>

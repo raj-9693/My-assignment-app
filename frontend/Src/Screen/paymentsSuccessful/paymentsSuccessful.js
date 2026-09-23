@@ -1,15 +1,7 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, ScrollView, StyleSheet, StatusBar } from 'react-native';
-import colors from '../../styles/colors';
+import React, { useEffect } from 'react';
+import { View, Text, TouchableOpacity, ScrollView, StatusBar,BackHandler } from 'react-native';
 
-// ─────────────────────────────────────────────────────────────
-// Full screen — navigate to it after a successful payment:
-//   navigation.navigate('PaymentSuccessScreen', { receipt })
-//
-// TODO (when backend is ready): replace dummyReceipt with the
-// real response from POST /payments/verify (or wherever the
-// backend confirms the registration + returns a registration ID).
-// ─────────────────────────────────────────────────────────────
+import { styles } from './index';
 
 const dummyReceipt = {
   competitionTitle: 'Feedants Classical Dance',
@@ -22,19 +14,34 @@ const dummyReceipt = {
 export default function PaymentSuccessScreen({ navigation, route }) {
   const receipt = (route && route.params && route.params.receipt) || dummyReceipt;
 
+const gotoHomeScreen=()=>{
+  navigation.reset({
+    index:0,
+    routes: [{ name: 'MainTabs' }]
+  })
+}
+
+useEffect(() => {
+    // Android Hardware Back Button click hone par yeh chalega
+    const backAction = () => {
+      gotoHomeScreen(); // Direct Home screen par reset kar do
+      return true; // Default back navigation ko stop karta hai
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction
+    );
+
+    return () => backHandler.remove();
+  }, [navigation]);
+
   return (
     <View style={styles.screen}>
       <StatusBar barStyle="dark-content" />
 
       <View style={styles.header}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => navigation && navigation.goBack()}
-          activeOpacity={0.7}
-        >
-          <Text style={styles.backIcon}>{'\u2190'}</Text>
-        </TouchableOpacity>
-
+       
         <View style={styles.headerTextColumn}>
           <Text style={styles.eyebrow}>REGISTRATION COMPLETE</Text>
           <Text style={styles.headerTitle}>Payment successful</Text>
@@ -149,158 +156,3 @@ export default function PaymentSuccessScreen({ navigation, route }) {
   );
 }
 
-const styles = StyleSheet.create({
-  screen: { flex: 1, backgroundColor: colors.white },
-
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    paddingTop: 24,
-    paddingBottom: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.border,
-  },
-  backButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: colors.background,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  backIcon: { fontSize: 16, color: colors.text },
-  headerTextColumn: { alignItems: 'center' },
-  eyebrow: { fontSize: 11, fontWeight: '700', color: colors.textSecondary, letterSpacing: 1 },
-  headerTitle: { fontSize: 18, fontWeight: '800', color: colors.text, marginTop: 2 },
-  shieldBadge: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: colors.primaryLight,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  shieldIcon: { fontSize: 16 },
-
-  scrollContent: { paddingHorizontal: 20, paddingTop: 32, paddingBottom: 20, alignItems: 'center' },
-
-  checkOuter: {
-    width: 110,
-    height: 110,
-    borderRadius: 55,
-    backgroundColor: colors.primaryLight,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 24,
-  },
-  checkInner: {
-    width: 76,
-    height: 76,
-    borderRadius: 38,
-    backgroundColor: colors.primary,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  checkIcon: { color: colors.white, fontSize: 32, fontWeight: '800' },
-
-  successTitle: { fontSize: 26, fontWeight: '800', color: colors.text, textAlign: 'center' },
-  successSubtitle: {
-    fontSize: 14,
-    color: colors.textSecondary,
-    textAlign: 'center',
-    marginTop: 10,
-    lineHeight: 20,
-    paddingHorizontal: 10,
-  },
-
-  receiptCard: {
-    width: '100%',
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 16,
-    padding: 18,
-    marginTop: 28,
-  },
-  receiptHeaderRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' },
-  receiptEyebrow: { fontSize: 11, fontWeight: '700', color: colors.textSecondary, letterSpacing: 0.5 },
-  receiptTitle: { fontSize: 17, fontWeight: '800', color: colors.text, marginTop: 6 },
-  paidPill: { backgroundColor: colors.primaryLight, borderRadius: 14, paddingVertical: 6, paddingHorizontal: 12 },
-  paidPillText: { fontSize: 12, fontWeight: '800', color: colors.primaryDark },
-
-  receiptDivider: { height: 1, backgroundColor: colors.border, marginVertical: 16 },
-  receiptRow: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 14 },
-  receiptLabel: { fontSize: 14, color: colors.textSecondary },
-  receiptValue: { fontSize: 14, fontWeight: '700', color: colors.text },
-  receiptValueMono: { fontSize: 14, fontWeight: '700', color: colors.text, letterSpacing: 0.5 },
-  receiptAmount: { fontSize: 16, fontWeight: '800', color: colors.primaryDark },
-
-  infoCard: {
-    width: '100%',
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    backgroundColor: colors.primaryLighter,
-    borderRadius: 16,
-    padding: 16,
-    marginTop: 16,
-  },
-  infoIconBox: {
-    width: 40,
-    height: 40,
-    borderRadius: 12,
-    backgroundColor: colors.white,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 12,
-  },
-  infoIcon: { fontSize: 16 },
-  infoTitle: { fontSize: 15, fontWeight: '800', color: colors.text },
-  infoText: { fontSize: 13, color: colors.textSecondary, marginTop: 6, lineHeight: 19 },
-
-  outlineCard: {
-    width: '100%',
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 16,
-    padding: 16,
-    marginTop: 16,
-  },
-  outlineIconBox: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: colors.primaryLight,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 12,
-  },
-  outlineIcon: { fontSize: 16, color: colors.primaryDark },
-
-  footer: {
-    paddingHorizontal: 20,
-    paddingTop: 12,
-    paddingBottom: 20,
-  },
-  primaryButton: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: colors.primaryDark,
-    borderRadius: 14,
-    paddingVertical: 16,
-  },
-  primaryButtonText: { color: colors.white, fontSize: 15, fontWeight: '700', marginRight: 8 },
-  arrowIcon: { color: colors.white, fontSize: 16 },
-
-  secondaryButton: {
-    backgroundColor: colors.background,
-    borderRadius: 14,
-    paddingVertical: 16,
-    alignItems: 'center',
-    marginTop: 12,
-  },
-  secondaryButtonText: { color: colors.text, fontSize: 15, fontWeight: '700' },
-});

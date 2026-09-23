@@ -30,22 +30,22 @@ function DateBlock({ icon, label, dateString }) {
   );
 }
 
-export default function ImportantDates({ dates }) {
+export default function ImportantDates({ registerBefore,submissionEnds,submissionStarts,resultDate }) {
   return (
     <View style={styles.card}>
       <Text style={styles.heading}>Important dates</Text>
 
       <View style={styles.grid}>
         <View style={styles.row}>
-          <DateBlock icon={'\u{1F4C5}'} label="Register before" dateString={dates.registerBefore} />
+          <DateBlock icon={'\u{1F4C5}'} label="Register before" dateString={registerBefore} />
           <View style={styles.divider} />
-          <DateBlock icon={'\u{1F4E4}'} label="Submission starts" dateString={dates.submissionStarts} />
+          <DateBlock icon={'\u{1F4E4}'} label="Submission starts" dateString={submissionStarts} />
         </View>
         <View style={styles.hDivider} />
         <View style={styles.row}>
-          <DateBlock icon={'\u{1F4E4}'} label="Submission ends" dateString={dates.submissionEnds} />
+          <DateBlock icon={'\u{1F4E4}'} label="Submission ends" dateString={submissionEnds} />
           <View style={styles.divider} />
-          <DateBlock icon={'\u{1F3C6}'} label="Result date" dateString={dates.resultDate} />
+          <DateBlock icon={'\u{1F3C6}'} label="Result date" dateString={resultDate} />
         </View>
       </View>
     </View>
