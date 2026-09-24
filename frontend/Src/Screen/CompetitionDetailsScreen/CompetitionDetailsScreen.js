@@ -134,7 +134,6 @@ export default function CompetitionDetailsScreen({ navigation, onCompetitionLoad
         registerBefore={competition.dates.registerBefore}
         spotsBooked={competition.spotsBooked}
         totalSpots={competition.totalSpots}
-        isUserRegistered={competition.isUserRegistered}
         entryFee={competition.entryFee}
         onPress={() => navigation.navigate('Registered')}
       />

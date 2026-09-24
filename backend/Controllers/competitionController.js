@@ -57,14 +57,14 @@ const registerForCompetition = async (req, res) => {
     if (now > new Date(competition.dates.registerBefore)) {
       return res.status(400).json({
         success: false,
-        message: 'Registration deadline has passed',
+        message: 'Registration time has ended',
       });
     }
 
     if (competition.spotsBooked >= competition.totalSpots) {
       return res.status(400).json({
         success: false,
-        message: 'Competition is housefull',
+        message: 'Competition spots are full',
       });
     }
 
@@ -88,26 +88,13 @@ const registerForCompetition = async (req, res) => {
       if (latestCompetition && now > new Date(latestCompetition.dates.registerBefore)) {
         return res.status(400).json({
           success: false,
-          message: 'Registration deadline has passed',
+          message: 'Registration time has ended',
         });
       }
 
       return res.status(400).json({
         success: false,
-        message: 'Competition is housefull',
-      });
-    }
-
-    const existingRegistration = await Registration.findOne({
-      competitionId: id,
-      userId: user._id,
-    });
-
-    if (existingRegistration) {
-      await Competition.findByIdAndUpdate(id, { $inc: { spotsBooked: -1 } });
-      return res.status(400).json({
-        success: false,
-        message: 'You are already registered in this competition.',
+        message: 'Competition spots are full',
       });
     }
 
@@ -124,13 +111,6 @@ const registerForCompetition = async (req, res) => {
         { _id: id, spotsBooked: { $gt: 0 } },
         { $inc: { spotsBooked: -1 } }
       );
-
-      if (error.code === 11000) {
-        return res.status(400).json({
-          success: false,
-          message: 'You are already registered in this competition.',
-        });
-      }
 
       throw error;
     }

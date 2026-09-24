@@ -7,36 +7,21 @@ export default function RegisterButton({
   registerBefore,
   spotsBooked,
   totalSpots,
-  isUserRegistered,
   entryFee,
   onPress,
 }) {
   const isTimeExpired = new Date() > new Date(registerBefore);
-  const status = isUserRegistered
-    ? 'registered'
-    : isTimeExpired
-    ? 'closed'
-    : spotsBooked >= totalSpots
-    ? 'full'
-    : 'register';
+  const isSpotsFull = spotsBooked >= totalSpots;
 
-  const CONFIG = {
-    register: { label: `Register Now - ₹${entryFee}`, disabled: false },
-    registered: { label: 'Already Registered', disabled: true },
-    full: { label: 'Housefull', disabled: true },
-    closed: { label: 'Registration Deadline Expired', disabled: true },
-  };
-
-  const { label, disabled } = CONFIG[status];
+  if (isTimeExpired || isSpotsFull) return null;
 
   return (
     <TouchableOpacity
-      style={[styles.button, disabled && styles.buttonDisabled]}
+      style={styles.button}
       onPress={onPress}
-      disabled={disabled}
       activeOpacity={0.85}
     >
-      <Text style={styles.label}>{label}</Text>
+      <Text style={styles.label}>Register Now - ₹{entryFee}</Text>
     </TouchableOpacity>
   );
 }
@@ -51,6 +36,5 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     marginTop: 8,
   },
-  buttonDisabled: { backgroundColor: colors.textMuted },
   label: { color: colors.white, fontSize: 15, fontWeight: '700' },
 });
