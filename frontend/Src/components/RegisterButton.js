@@ -3,16 +3,31 @@ import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import colors from '../styles/colors';
 
 
-export default function RegisterButton({ status = 'register', entryFee, onPress }) {
+export default function RegisterButton({
+  registerBefore,
+  spotsBooked,
+  totalSpots,
+  isUserRegistered,
+  entryFee,
+  onPress,
+}) {
+  const isTimeExpired = new Date() > new Date(registerBefore);
+  const status = isUserRegistered
+    ? 'registered'
+    : isTimeExpired
+    ? 'closed'
+    : spotsBooked >= totalSpots
+    ? 'full'
+    : 'register';
+
   const CONFIG = {
-    register: { label: `Register now · ₹${entryFee}`, disabled: false },
-    registered: { label: 'Registered', disabled: false },
-    upload: { label: 'Upload Submission', disabled: false },
-    full: { label: 'Spots full', disabled: true },
-    closed: { label: 'Registration closed', disabled: true },
+    register: { label: `Register Now - ₹${entryFee}`, disabled: false },
+    registered: { label: 'Already Registered', disabled: true },
+    full: { label: 'Housefull', disabled: true },
+    closed: { label: 'Registration Deadline Expired', disabled: true },
   };
 
-  const { label, disabled } = CONFIG[status] || CONFIG.register;
+  const { label, disabled } = CONFIG[status];
 
   return (
     <TouchableOpacity

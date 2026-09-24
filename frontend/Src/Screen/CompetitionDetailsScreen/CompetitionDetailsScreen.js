@@ -71,13 +71,6 @@ export default function CompetitionDetailsScreen({ navigation, onCompetitionLoad
 
   if (!competition) return null;
 
-  const spotsLeft = competition.totalSpots - competition.spotsBooked;
-  const buttonStatus = competition.isUserRegistered
-    ? 'registered'
-    : spotsLeft <= 0
-    ? 'full'
-    : 'register';
-
   return (
     <View style={styles.screen}>
       <StatusBar barStyle="dark-content" />
@@ -138,7 +131,10 @@ export default function CompetitionDetailsScreen({ navigation, onCompetitionLoad
       </ScrollView>
 
       <RegisterButton
-        status={buttonStatus}
+        registerBefore={competition.dates.registerBefore}
+        spotsBooked={competition.spotsBooked}
+        totalSpots={competition.totalSpots}
+        isUserRegistered={competition.isUserRegistered}
         entryFee={competition.entryFee}
         onPress={() => navigation.navigate('Registered')}
       />

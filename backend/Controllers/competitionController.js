@@ -45,62 +45,104 @@ const registerForCompetition = async (req, res) => {
       });
     }
 
-    // 2. Pehle check karein ya naya User create karein
+    const competition = await Competition.findById(id);
+    if (!competition) {
+      return res.status(404).json({
+        success: false,
+        message: 'Competition not found',
+      });
+    }
+
+    const now = new Date();
+    if (now > new Date(competition.dates.registerBefore)) {
+      return res.status(400).json({
+        success: false,
+        message: 'Registration deadline has passed',
+      });
+    }
+
+    if (competition.spotsBooked >= competition.totalSpots) {
+      return res.status(400).json({
+        success: false,
+        message: 'Competition is housefull',
+      });
+    }
+
     let user = await User.findOne({ email });
     if (!user) {
       user = await User.create({ name, email, phone });
     }
 
-    // 3. ATOMIC UPDATE: Spots check karein aur increment karein (Concurrency Protection)
-    const competition = await Competition.findOneAndUpdate(
+    const reservedCompetition = await Competition.findOneAndUpdate(
       {
         _id: id,
-        $expr: { $lt: ['$spotsBooked', '$totalSpots'] }, // Ensures spotsBooked < totalSpots
+        'dates.registerBefore': { $gt: now },
+        $expr: { $lt: ['$spotsBooked', '$totalSpots'] },
       },
       { $inc: { spotsBooked: 1 } },
       { new: true }
     );
 
-    // Agar spots full hain ya ID galat hai
-    if (!competition) {
+    if (!reservedCompetition) {
+      const latestCompetition = await Competition.findById(id);
+      if (latestCompetition && now > new Date(latestCompetition.dates.registerBefore)) {
+        return res.status(400).json({
+          success: false,
+          message: 'Registration deadline has passed',
+        });
+      }
+
       return res.status(400).json({
         success: false,
-        message:'Registration is closed for this competition.',
+        message: 'Competition is housefull',
       });
     }
 
-    // 4. Duplicate Registration check karein
     const existingRegistration = await Registration.findOne({
       competitionId: id,
       userId: user._id,
     });
 
     if (existingRegistration) {
-      // Rollback atomic update agar user pehle se registered hai
       await Competition.findByIdAndUpdate(id, { $inc: { spotsBooked: -1 } });
       return res.status(400).json({
         success: false,
-        message: 'you are olready registered in  competition.',
+        message: 'You are already registered in this competition.',
       });
     }
 
-    // 5. Naya Registration Record save karein
-    const registration = await Registration.create({
-      competitionId: competition._id,
-      userId: user._id,
-      paymentStatus: 'paid', // Dummy payment success
-      status: 'registered',
-    });
+    let registration;
+    try {
+      registration = await Registration.create({
+        competitionId: reservedCompetition._id,
+        userId: user._id,
+        paymentStatus: 'paid', // Dummy payment success
+        status: 'registered',
+      });
+    } catch (error) {
+      await Competition.findOneAndUpdate(
+        { _id: id, spotsBooked: { $gt: 0 } },
+        { $inc: { spotsBooked: -1 } }
+      );
 
-    // 6. Success Response
+      if (error.code === 11000) {
+        return res.status(400).json({
+          success: false,
+          message: 'You are already registered in this competition.',
+        });
+      }
+
+      throw error;
+    }
+
     return res.status(201).json({
       success: true,
       message: 'Registration successfully ho gaya hai! 🎉',
       data: {
         registrationId: registration._id,
         user: { name: user.name, email: user.email },
-        updatedSpotsBooked: competition.spotsBooked,
-        totalSpots: competition.totalSpots,
+        updatedSpotsBooked: reservedCompetition.spotsBooked,
+        totalSpots: reservedCompetition.totalSpots,
       },
     });
   } catch (error) {
