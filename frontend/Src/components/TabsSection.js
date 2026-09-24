@@ -24,7 +24,7 @@ export default function TabsSection({ aboutCompetition, judgingParameters, rules
 
   const handleTabChange = (key) => {
     setActiveTab(key);
-    setExpanded(false); // collapse again when switching tabs
+    setExpanded(false); 
   };
 
   return (

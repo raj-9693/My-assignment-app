@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import colors from '../styles/colors';
 
 export default function Header({ onGoBack }) {
-  const [language, setLanguage] = useState('ENG'); // UI-only toggle for now
+  const [language, setLanguage] = useState('ENG'); 
 
   return (
     <View style={styles.container}>

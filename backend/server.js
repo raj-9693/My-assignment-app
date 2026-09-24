@@ -13,10 +13,10 @@ const competitionRouter = require('./routers/CompetitionRoutes');
 
 const app = express();
 
-// 1. Database connect karo
+// 1. Database connect 
 connectDB();
 
-// 2. Middlewares
+
 app.use(cors());
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true }));

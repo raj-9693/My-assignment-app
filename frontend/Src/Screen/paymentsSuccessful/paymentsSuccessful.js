@@ -22,10 +22,10 @@ const gotoHomeScreen=()=>{
 }
 
 useEffect(() => {
-    // Android Hardware Back Button click hone par yeh chalega
+    
     const backAction = () => {
-      gotoHomeScreen(); // Direct Home screen par reset kar do
-      return true; // Default back navigation ko stop karta hai
+      gotoHomeScreen(); 
+      return true; 
     };
 
     const backHandler = BackHandler.addEventListener(

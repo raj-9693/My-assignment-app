@@ -24,7 +24,7 @@ import ApiServices from "./ApiServices"
     }
    };
 
-// 2. POST User Registration Function (Jo abhi backend banaya)
+
 
 export const registerForCompetition = async ( userData) => {
    const competitionId ='6ab2c3b1fcd9dc1bb23f5ffd'

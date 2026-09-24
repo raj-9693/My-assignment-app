@@ -103,7 +103,7 @@ const registerForCompetition = async (req, res) => {
       registration = await Registration.create({
         competitionId: reservedCompetition._id,
         userId: user._id,
-        paymentStatus: 'paid', // Dummy payment success
+        paymentStatus: 'paid', 
         status: 'registered',
       });
     } catch (error) {

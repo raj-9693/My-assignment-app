@@ -12,9 +12,7 @@ const competitionSchema = new mongoose.Schema(
     totalSpots: { type: Number, required: true },
     spotsBooked: { type: Number, default: 0 },
 
-    // NOTE: in a real app this should be derived per logged-in user
-    // (via the Registration collection), not stored directly on the
-    // competition. Kept here for now since auth isn't wired up yet.
+    
     isUserRegistered: { type: Boolean, default: false },
 
     judge: {

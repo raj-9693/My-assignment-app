@@ -53,10 +53,10 @@ export default function Registered({ navigation, route }) {
     }
 
     try {
-  // 1. Dono parameters pass karein: competitionId aur Mydeta
+ 
   const response = await registerForCompetition( Mydeta);
 
-  // 2. Axios response check karein
+  
   if (response?.data?.success || response?.status === 200) {
     navigation.navigate('paymentsSuccessful');
   }

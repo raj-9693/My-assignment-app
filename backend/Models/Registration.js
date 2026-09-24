@@ -31,7 +31,7 @@ const registrationSchema = new mongoose.Schema({
   }
 }, { timestamps: true });
 
-// Ek user ek competition mein sirf ek baar hi register kar sake — yeh line important hai
+
 registrationSchema.index({ competitionId: 1, userId: 1 }, { unique: true });
 
 module.exports = mongoose.model('Registration', registrationSchema);
