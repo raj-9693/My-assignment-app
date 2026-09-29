@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 import colors from "../../styles/colors";
 
  export const styles = StyleSheet.create({
-  safeArea:{flax:1},
+ 
   screen: { flex: 1, backgroundColor: colors.background },
   scrollContent: { paddingHorizontal: 20, paddingBottom: 20 },
 
