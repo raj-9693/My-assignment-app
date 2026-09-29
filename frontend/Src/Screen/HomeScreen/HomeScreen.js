@@ -7,11 +7,12 @@ import {
   TouchableOpacity,
   ScrollView,
   StatusBar,
+  
 } from 'react-native';
 
 import { LinearGradient } from 'expo-linear-gradient';
 import colors from '../../styles/colors';
-
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 const dummyUser = {
@@ -143,6 +144,7 @@ function CompetitionListItem({ competition, onPress }) {
 export default function HomeScreen({ navigation, competitionData }) {
   
   return (
+    <SafeAreaView style={styles.safeArea}>
     <View style={styles.screen}>
       <StatusBar barStyle="dark-content" />
 
@@ -206,6 +208,7 @@ export default function HomeScreen({ navigation, competitionData }) {
 
      
     </View>
+   </SafeAreaView>
   );
 }
 

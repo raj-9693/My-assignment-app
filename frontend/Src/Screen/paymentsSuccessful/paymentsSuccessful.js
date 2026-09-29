@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, StatusBar,BackHandler } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { styles } from './index';
 
@@ -37,6 +38,7 @@ useEffect(() => {
   }, [navigation]);
 
   return (
+<SafeAreaView style={{flex:1}}>
     <View style={styles.screen}>
       <StatusBar barStyle="dark-content" />
 
@@ -153,6 +155,7 @@ useEffect(() => {
         </TouchableOpacity>
       </View>
     </View>
+    </SafeAreaView>
   );
 }
 

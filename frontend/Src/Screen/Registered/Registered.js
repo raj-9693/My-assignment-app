@@ -13,7 +13,7 @@ import {
 import colors from '../../styles/colors';
 import {registerForCompetition} from '../../Services/competitionApi'
 import { styles } from './index';
-
+import { SafeAreaView } from 'react-native-safe-area-context';
 const dummyEntry = {
   title: 'Feedants Classical Dance',
   subtitle: 'Solo entry · Online',
@@ -72,6 +72,7 @@ export default function Registered({ navigation, route }) {
   };
 
   return (
+    <SafeAreaView style={{flex:1}}>
     <KeyboardAvoidingView
       style={styles.screen}
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
@@ -196,6 +197,7 @@ export default function Registered({ navigation, route }) {
         </Text>
       </View>
     </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 }
 
