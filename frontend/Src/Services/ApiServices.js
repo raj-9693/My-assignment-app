@@ -10,3 +10,8 @@ const ApiServices = axios.create({
   },
 });
 export default ApiServices;  
+
+ApiServices.interceptors.request.use((config) => {
+  console.log('REQUEST URL:', (config.baseURL || '') + (config.url || ''));
+  return config;
+});

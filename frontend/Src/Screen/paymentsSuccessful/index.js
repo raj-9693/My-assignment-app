@@ -10,7 +10,7 @@ import colors from "../../styles/colors";
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: 20,
-    paddingTop: 24,
+    paddingTop: 2,
     paddingBottom: 16,
     borderBottomWidth: 1,
     borderBottomColor: colors.border,

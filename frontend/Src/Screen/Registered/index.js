@@ -10,7 +10,7 @@ import colors from "../../styles/colors";
     justifyContent: 'space-between',
     alignItems: 'flex-start',
     paddingHorizontal: 20,
-    paddingTop: 24,
+    paddingTop: 2,
     paddingBottom: 16,
   },
   headerTitle: { fontSize: 24, fontWeight: '800', color: colors.text },

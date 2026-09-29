@@ -13,7 +13,7 @@ import RewardsList from '../../components/RewardsList';
 import { PaymentInfoBanner, ReferEarnCard } from '../../components/PaymentAndReferral';
 import RegisterButton from '../../components/RegisterButton';
 
-
+import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../../styles/colors';
 import { getActiveCompetition } from '../../Services/competitionApi';
 
@@ -72,7 +72,7 @@ export default function CompetitionDetailsScreen({ navigation, onCompetitionLoad
   if (!competition) return null;
 
   return (
-    <View style={styles.screen}>
+    <SafeAreaView style={styles.screen}>
       <StatusBar barStyle="dark-content" />
 
      
@@ -137,7 +137,7 @@ export default function CompetitionDetailsScreen({ navigation, onCompetitionLoad
         entryFee={competition.entryFee}
         onPress={() => navigation.navigate('Registered')}
       />
-    </View>
+    </SafeAreaView>
   );
 }
 
