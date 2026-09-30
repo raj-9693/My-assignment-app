@@ -72,7 +72,7 @@ export default function CompetitionDetailsScreen({ navigation, onCompetitionLoad
   if (!competition) return null;
 
   return (
-    <SafeAreaView style={styles.screen}>
+    <SafeAreaView style={styles.screen} edges={['top']}>
       <StatusBar barStyle="dark-content" />
 
      

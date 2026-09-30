@@ -6,9 +6,9 @@ import colors from "../../styles/colors";
   screen: { flex: 1, backgroundColor: colors.background },
   scrollContent: { paddingHorizontal: 20, paddingBottom: 20 },
 
-  greetingRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start',paddingHorizontal:18,paddingVertical:12 },
+  greetingRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start',paddingHorizontal:18,paddingVertical:10},
   greetingText: { fontSize: 14, color: colors.textSecondary },
-  greetingTitle: { fontSize: 24, fontWeight: '800', color: colors.text, marginTop: 4 },
+  greetingTitle: { fontSize: 24, fontWeight: '800', color: colors.text, marginTop: 4 },    
   avatar: { width: 48, height: 48, borderRadius: 24 },
 
   searchRow: {

@@ -38,7 +38,7 @@ useEffect(() => {
   }, [navigation]);
 
   return (
-<SafeAreaView style={{flex:1}}>
+<SafeAreaView style={{flex:1}} edges={['top']}>
     <View style={styles.screen}>
       <StatusBar barStyle="dark-content" />
 

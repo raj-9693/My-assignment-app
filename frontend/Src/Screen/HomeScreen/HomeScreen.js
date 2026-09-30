@@ -146,7 +146,7 @@ export default function HomeScreen({ navigation, competitionData }) {
   
   return (
    
-    <SafeAreaView style={styles.screen}>
+   <SafeAreaView style={styles.screen} edges={['top']}>
       <StatusBar barStyle="dark-content" />
 
       
